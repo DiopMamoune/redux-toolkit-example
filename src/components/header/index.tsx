@@ -5,7 +5,8 @@ import { clear } from "../../features/cart/cartSlice";
 import { RootState } from "../../store";
 
 const Header = () => {
-  const count = useSelector((state: RootState) => state.cart.countProducts);
+  const count = useSelector((state: any) => state.cart.countProducts);
+  const email = useSelector((state: RootState) => state.auth.email);
 
   const dispatch = useDispatch();
 
@@ -21,6 +22,7 @@ const Header = () => {
         <Remove href="#remove" onClick={onClear}>
           x
         </Remove>
+        {email && <Image src="/avatar.png" height="30" />} <User>{email}</User>
       </RightSection>
     </Wrapper>
   );
@@ -45,6 +47,10 @@ const Cart = styled.section`
   font-size: 16px;
 `;
 
+const User = styled.span`
+  font-size: 16px;
+`;
+
 const Remove = styled.a`
   font-size: 20px;
   color: red;
@@ -55,4 +61,9 @@ const RightSection = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
+`;
+
+const Image = styled.img`
+  display: block;
+  border-radius: 50%;
 `;
